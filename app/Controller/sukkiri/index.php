@@ -39,6 +39,7 @@ $app->post('/results/', function (Request $request, Response $response) {
 
 	//GETされた内容を取得します。
 	$limit = $request->getParsedBody();
+	var_dump($limit);
 	$minarray = array();
   $min=100;
 
