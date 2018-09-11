@@ -10,16 +10,166 @@
 
 {#ここから表示したい情報を記載します。#}
 {% block page_content %}
-    <div class="page-header text-center">
-        <h1>サービス名</h1>
+
+<ons-page>
+  <ons-tabbar swipeable position="top">
+    <ons-tab page="tab1.html" label="Tab 1" icon="ion-home, material:md-home" badge="7" active>
+    </ons-tab>
+    <ons-tab page="tab2.html" label="Tab 2" icon="md-settings" active-icon="md-face">
+    </ons-tab>
+    <ons-tab page="tab3.html" label="Tab 3" icon="md-settings" active-icon="md-face">
+    </ons-tab>
+  </ons-tabbar>
+</ons-page>
+
+<template id="tab1.html">
+
+
+  <ons-page id="Tab1">
+
+    <ons-card>
+
+    <ons-list-item>
+      <div class="left">
+        <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
+      </div>
+      <div class="center">
+        <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
+        <span class="list-item__subtitle"><font size="5">180</font></span>
+      </div>
+    </ons-list-item>
+
+
+        <br><br>
+
+
+        <ons-list-item>
+          <div class="left">
+            <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
+          </div>
+          <div class="center">
+            <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
+            <span class="list-item__subtitle"><font size="5">180</font></span>
+          </div>
+        </ons-list-item>
+
+
+        <br><br>
+
+
+        <ons-list-item>
+          <div class="left">
+            <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
+          </div>
+          <div class="center">
+            <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
+            <span class="list-item__subtitle"><font size="5">180</font></span>
+          </div>
+        </ons-list-item>s
+
+   </ons-card>
+
+
+  </ons-page>
+</template>
+
+<template id="tab2.html">
+  <ons-page id="Tab2">
+
+  <ons-card>
+
+  <ons-list-item>
+    <div class="left">
+      <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
     </div>
-    <div class="container">
-        <div class="box">
-            <div class="row">
-                ここにコンテンツが入る
-            </div>
+    <div class="center">
+      <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
+      <span class="list-item__subtitle"><font size="5">180</font></span>
+    </div>
+  </ons-list-item>
+
+
+      <br><br>
+
+
+      <ons-list-item>
+        <div class="left">
+          <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
         </div>
+        <div class="center">
+          <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
+          <span class="list-item__subtitle"><font size="5">180</font></span>
+        </div>
+      </ons-list-item>
+
+
+      <br><br>
+
+
+      <ons-list-item>
+        <div class="left">
+          <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
+        </div>
+        <div class="center">
+          <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
+          <span class="list-item__subtitle"><font size="5">180</font></span>
+        </div>
+      </ons-list-item>s
+
+ </ons-card>
+
+  </ons-page>
+</template>
+
+<template id="tab3.html">
+  <ons-page id="Tab3">
+  <ons-card>
+
+  <ons-list-item>
+    <div class="left">
+      <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
     </div>
+    <div class="center">
+      <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
+      <span class="list-item__subtitle"><font size="5">180</font></span>
+    </div>
+  </ons-list-item>
+
+
+      <br><br>
+
+
+      <ons-list-item>
+        <div class="left">
+          <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
+        </div>
+        <div class="center">
+          <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
+          <span class="list-item__subtitle"><font size="5">180</font></span>
+        </div>
+      </ons-list-item>
+
+
+      <br><br>
+
+
+      <ons-list-item>
+        <div class="left">
+          <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
+        </div>
+        <div class="center">
+          <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
+          <span class="list-item__subtitle"><font size="5">180</font></span>
+        </div>
+      </ons-list-item>s
+
+ </ons-card>
+  </ons-page>
+</template>
+
+
+
+
 {% endblock %}
 
 {#共通フッタとして追記したい情報を記載します。#}
