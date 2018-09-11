@@ -72,11 +72,11 @@ abstract class Dao
      * @param array $param WHERE句として指定したい条件を連想配列で指定します。値に%があると、部分一致などもできます
      * @param string $sort ソートしたいカラム名を指定します
      * @param string $order 昇順=ASC 降順=DESCを指定します
-     * @param int $limit 取得件数を指定します。デフォルト10件
+     * @param int $limit 取得件数を指定します。デフォルト全件
      * @param bool $fetch_all false=一件のみ取得します true=全件取得します
      * @return array|mixed 取得した情報を配列で返送します
      */
-    public function select(array $param, $sort = "", $order = "ASC", $limit = 10, $fetch_all = false)
+    public function select(array $param, $sort = "", $order = "ASC", $limit = "", $fetch_all = false)
     {
         //クエリビルダをインスタンス化
         $queryBuilder = new QueryBuilder($this->db);
@@ -134,6 +134,20 @@ abstract class Dao
      * @param array $param 挿入したいデータを連想配列で指定します
      * @return int|bool 発番されればidを返送、失敗したらfalseを返送します
      */
+    public function distinct() {
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('distinct price')
+            ->from($this->_table_name)
+            ->orderBy("price","ASC")
+            ->setMaxResults(15);
+
+        $query = $queryBuilder->execute();
+        $res = $query->FetchALL();
+        return $res;
+
+    }
+
     public function insert(array $param)
     {
 
