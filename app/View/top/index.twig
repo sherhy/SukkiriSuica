@@ -9,30 +9,42 @@
 
 {#ここから表示したい情報を記載します。#}
 {% block page_content %}
-    <div class="page-header text-center">
-
-        <h1>スッキリSuica</h1>
-        <p>～残高0の幸せ～</p>
-
-    </div>
-    <div class="container">
-        <div class="box">
-            <div class="row">
-
-                <div class="col-md-4 col-md-offset-4">
-                    <form id="sukkiri" method="GET" action="/index/">
-                        <div class="form-inline" style="padding-bottom:30px">
-                            <label for="value">スッキリさせる金額</label>
-                            <input type="text" class="form-control" id="value" placeholder="">
-                            <label>円</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">スッキリ</button>
-                    </form>
+    <style>
+        .page__background {
+            background-image: url("https://www.pakutaso.com/shared/img/thumb/PAK83_500encointachi20140305_TP_V4.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            opacity: 0.6;
+        }
+    </style>
+    <ons-page>
+        <div class="page-header text-center">
+            <h1>スッキリSuica</h1>
+            <p>～残高0の幸せ～</p>
+        </div>
+        <div class="container">
+            <div class="box">
+                <div class="row">
+                    <!--<div class="col-md-4 col-md-offset-4">-->
+                    <div style="text-align: center; margin: 30px 15px;">
+                        <form id="sukkiri" method="GET" action="/results/">
+                            <div class="form-inline" style="padding-bottom:30px">
+                                <!--<label for="value">スッキリさせる金額</label>-->
+                                <!-- <input type="text" class="form-control" id="value" placeholder=""> -->
+                                <ons-input id="value" type="number" placeholder="" modifier="underbar" float="float"></ons-input>
+                                <label>円を</label>
+                            </div>
+                            <!--<button type="submit" class="btn btn-primary btn-lg btn-block">スッキリ</button>-->
+                            <ons-button modifier="large" type="submit" class="btn btn-primary btn-lg btn-block">スッキリ！</button>
+                        </form>
+                    </div>
                 </div>
 
             </div>
         </div>
-    </div>
+    </ons-page>
 {% endblock %}
 
 {#共通フッタとして追記したい情報を記載します。#}
