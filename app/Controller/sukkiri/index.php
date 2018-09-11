@@ -43,9 +43,12 @@ $app->post('/results/', function (Request $request, Response $response) {
   $min=100;
 
   $userItem = new Item($this->db);
-  $a = $userItem->distinct();
-  var_dump($a);
-  $a = array('11','32','54','108','216','324');
+  $c = $userItem->distinct();
+  $a = array();
+  foreach($c as $b){
+		array_push($a, strval($b["price"]));
+  }
+  // $a = array('11','32','54','108','216','324');
   $l = 4;
   $i=1;
   while($i<=$l)
@@ -56,17 +59,13 @@ $app->post('/results/', function (Request $request, Response $response) {
     {
       $xy=substr($xy,0,-1);
       $arr = explode(',', $xy);
-      if(array_sum($arr)==$limit)
-      {
+      if(array_sum($arr)==$limit){
         $min=0;
         $minarray=$arr;
         break;
-      }
-      elseif(array_sum($arr)<$limit)
-      {
+      } elseif(array_sum($arr)<$limit) {
         $minx=$limit-array_sum($arr);
-        if($min>$minx)
-        {
+        if($min>$minx) {
           $min=$minx;
           $minarray=$arr;
         }
@@ -79,9 +78,14 @@ $app->post('/results/', function (Request $request, Response $response) {
     $i += 1;
   }
 
-
-
-	// $res = [88, 206]
+  $res = array();
+  foreach ($minarray as $_) {
+  	$param["price"]=$_;
+  	$userItem->select($param, "", "", 1, false);
+  	array_push($res, $userItem);
+  }
+  var_dump($res);
+	// $minarray = [324, 206]
 
   // Render index view
 	return $this->view->render($response, 'sukkiri/sukkiri.twig', $res);
