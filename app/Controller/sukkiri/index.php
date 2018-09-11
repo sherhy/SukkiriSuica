@@ -25,21 +25,15 @@ function pat($a, $l) {
 }
 
 
-		// $data = [];
-  //   $userItem = new Item($this->db);
-  //   $where = [
-  //       'price' => 100,
-  //       'name'  => '%チョコレート%'
-  //   ];
-  //   $data = $userItem->select($where);
-  //   var_dump($data);
 
 // スッキリ画面コントローラ
 $app->post('/results/', function (Request $request, Response $response) {
 
 	//GETされた内容を取得します。
-	$limit = $request->getParsedBody();
-	var_dump($limit);
+	$money = $request->getParsedBody();
+	$limit = $money["zangaku"];
+	// var_dump($limit);
+
 	$minarray = array();
   $min=100;
 
@@ -78,15 +72,13 @@ $app->post('/results/', function (Request $request, Response $response) {
     }
     $i += 1;
   }
-
   $res = array();
   foreach ($minarray as $_) {
   	$param["price"]=$_;
-  	$userItem->select($param, "", "", 1, false);
-  	array_push($res, $userItem);
+  	$result=$userItem->select($param, "", "", 1, false);
+  	array_push($res, $result);
   }
   var_dump($res);
-	// $minarray = [324, 206]
 
   // Render index view
 	return $this->view->render($response, 'sukkiri/sukkiri.twig', $res);
