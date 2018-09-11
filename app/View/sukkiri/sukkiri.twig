@@ -27,52 +27,29 @@
   <ons-page id="Tab1">
 
     <ons-card>
-
-    <ons-list-item>
-      <div class="left">
-        <img src="http://image.rakuten.co.jp/repmarket/cabinet/kame/16-01/kam662230.jpg" alt="Onsen UI" style="width: 80%">
-      </div>
-      <div class="center">
-        <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
-        <span class="list-item__subtitle"><font size="5">180</font></span>
-      </div>
-    </ons-list-item>
-
-        <br><br>
-
+      <!-- 1個分 -->
+      {% for val in res %}
         <ons-list-item>
           <div class="left">
-            <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
+            <img src="{{ val.img }}" alt="Onsen UI" style="width: 80%">
           </div>
           <div class="center">
-            <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
-            <span class="list-item__subtitle"><font size="5">180</font></span>
+            <span class="list-item__title"><font size="5">{{ val.product_name }}</font></span>
+            <span class="list-item__subtitle"><font size="5">{{ val.price }}</font></span>
           </div>
         </ons-list-item>
-
         <br><br>
-
-        <ons-list-item>
-          <div class="left">
-            <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 80%">
-          </div>
-          <div class="center">
-            <span class="list-item__title"><font size="5">かっぱえびせん</font></span>
-            <span class="list-item__subtitle"><font size="5">180</font></span>
-          </div>
-        </ons-list-item>
-
-        <br><br>
-
-        {#合計金額表示#}
-        <ons-list-item>
-          <div class="left">
-            <span class="list-item__title"><font size="6">合計金額</font></span>
-          </div>
-          <div class="center">
-            <span class="list-item__subtitle"><font size="6">1000</font></span>
-          </div>
-        </ons-list-item>
+      {% endfor %}
+     
+      {#合計金額表示#}
+      <ons-list-item>
+        <div class="left">
+          <span class="list-item__title"><font size="6">合計金額</font></span>
+        </div>
+        <div class="center">
+          <span class="list-item__subtitle"><font size="6">{{total}}</font></span>
+        </div>
+      </ons-list-item>
 
    </ons-card>
 
