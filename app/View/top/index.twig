@@ -40,7 +40,7 @@
                 <div class="row">
                     <!--<div class="col-md-4 col-md-offset-4">-->
                     <div style="text-align: center; margin: 30px 15px;">
-                        <form id="sukkiri" method="GET" action="/results/">
+                        <form id="sukkiri" method="POST" action="/results/">
                             <div class="form-inline" style="padding-bottom:30px">
                                 <!--<label for="value">スッキリさせる金額</label>-->
                                 <!-- <input type="text" class="form-control" id="value" placeholder=""> -->
@@ -52,11 +52,17 @@
                         </form>
                     </div>
                 </div>
-
-            </div>
-        </div>
-    </ons-page>
+			</div>
+		</div>
+	</ons-page>
 {% endblock %}
 
 {#共通フッタとして追記したい情報を記載します。#}
 {% block footer_scripts_add %}{% endblock %}
+
+#10: 検索バーの微調整 Conflicts
+1 conflicting file
+index.twig
+app/View/top/index.twig
+app/View/top/index.twig
+1 conflict
