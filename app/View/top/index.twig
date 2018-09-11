@@ -39,22 +39,21 @@
                 <div class="row">
                     <!--<div class="col-md-4 col-md-offset-4">-->
                     <div style="text-align: center; margin: 30px 15px;">
-                        <form id="sukkiri" method="GET" action="/results/">
-                            <div class="form-inline" style="padding-bottom:30px">
-                                <!--<label for="value">スッキリさせる金額</label>-->
-                                <!-- <input type="text" class="form-control" id="value" placeholder=""> -->
-                                <ons-input id="value" type="number" placeholder="" modifier="underbar" float="float" style="background-color:white;opacity:0.5;border-radius:100px;padding-left:20px;"></ons-input>
-                                <label style="font-size: x-large;float:right;">円を</label>
-                            </div>
-                            <!--<button type="submit" class="btn btn-primary btn-lg btn-block">スッキリ</button>-->
-                            <ons-button modifier="large" type="submit" class="btn btn-primary btn-lg btn-block">スッキリ！</button>
-                        </form>
+                        <form id="sukkiri" method="POST" action="/results/">
+							            <div class="form-inline" style="padding-bottom:30px">
+                            <!--<label for="value">スッキリさせる金額</label>-->
+                            <!-- <input type="text" class="form-control" id="value" placeholder=""> -->
+								            <ons-input id="value" name="zangaku" type="number" placeholder="" modifier="underbar" float="float"></ons-input>
+								            <label>円を</label>
+							            </div>
+							            <!--<button type="submit" class="btn btn-primary btn-lg btn-block">スッキリ</button>-->
+							            <button modifier="large" type="submit" class="btn btn-primary btn-lg btn-block">スッキリ!</button>
+						            </form>
                     </div>
                 </div>
-
-            </div>
-        </div>
-    </ons-page>
+			</div>
+		</div>
+	</ons-page>
 {% endblock %}
 
 {#共通フッタとして追記したい情報を記載します。#}

@@ -134,6 +134,20 @@ abstract class Dao
      * @param array $param 挿入したいデータを連想配列で指定します
      * @return int|bool 発番されればidを返送、失敗したらfalseを返送します
      */
+    public function distinct() {
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('distinct price')
+            ->from($this->_table_name)
+            ->orderBy("price","ASC")
+            ->setMaxResults(15);
+
+        $query = $queryBuilder->execute();
+        $res = $query->FetchALL();
+        return $res;
+
+    }
+
     public function insert(array $param)
     {
 
