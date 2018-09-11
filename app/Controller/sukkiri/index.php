@@ -5,7 +5,7 @@ use Slim\Http\Response;
 use Model\Dao\User;
 
 // スッキリ画面コントローラ
-$app->get('/results/', function (Request $request, Response $response) {
+$app->post('/results/', function (Request $request, Response $response) {
 
     //GETされた内容を取得します。
     $data = $request->getQueryParams();
