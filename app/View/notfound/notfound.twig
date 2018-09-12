@@ -1,0 +1,40 @@
+{#レイアウトを継承します#}
+{% extends "layout/layout.twig" %}
+
+{#HTMLのタイトルを定義します。#}
+{% block title %}{% endblock %}
+
+{# 適用させたいスタイルシートのパスを指定します #}
+{% block header_scripts_add %}{% endblock %}
+
+{#ここから表示したい情報を記載します。#}
+{% block page_content %}
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Bitter:700');
+        .page__background {
+            background-image: url("https://www.pakutaso.com/shared/img/thumb/PAK83_500encointachi20140305_TP_V4.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            opacity: 0.8;
+        }
+        .main{
+            text-align:center;
+            padding: 100px 30px;
+        }
+        .reButton{
+            padding:0 20px;
+        }
+    </style>
+    <ons-page>
+        <div class="main">
+            <h1>ないです。</h1>
+            <p>この価格ではスッキリ使い切れる組み合わせが見つかりませんでした…</p>
+        </div>
+        <div class="reButton">
+        <a href="/"><ons-button modifier="large">TOPに戻る</ons-button></a>
+        </div>
+    </ons-page>
+    <script></script>
+{% endblock %}
