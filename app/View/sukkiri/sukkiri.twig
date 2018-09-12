@@ -15,274 +15,258 @@
 <script>
 
 {% if total.0 == 0 %}
-  window.location.href = "/notfound/";
+	window.location.href = "/notfound/";
 {% endif %}
 var showTemplateDialog = function(id) {
-  var dialog = document.getElementById('my-dialog'+id);
+	var dialog = document.getElementById('my-dialog'+id);
 
-  if (dialog) {
-    dialog.show();
-  } else {
-    ons.createElement('dialog'+id+'.html', { append: true })
-    .then(function(dialog) {
-      dialog.show();
-    });
-  }
+	if (dialog) {
+		dialog.show();
+	} else {
+		ons.createElement('dialog'+id+'.html', { append: true })
+		.then(function(dialog) {
+			dialog.show();
+		});
+	}
 };
 
 
 
 var changeitem = function(id, price, name, img) {
-  document.getElementById(String(id)+"-name").innerText=name;
-  document.getElementById(String(id)+"-price").innerText=price+"円";
-  document.getElementById(String(id)+"-img").src=img;
-  hideDialog("my-dialog"+String(id));
+	document.getElementById(String(id)+"-name").innerText=name;
+	document.getElementById(String(id)+"-price").innerText=price+"円";
+	document.getElementById(String(id)+"-img").src=img;
+	hideDialog("my-dialog"+String(id));
 };
 
 
 var hideDialog = function(id) {
-  document
-  .getElementById(id)
-  .hide();
+	document
+	.getElementById(id)
+	.hide();
 };
 </script>
 
 <ons-page>
-  {% include 'menu/menu.twig' %}
-  <ons-tabbar swipeable position="top">
-    <ons-tab page="tab1.html" label="リスト１" active>
-    </ons-tab>
-    <ons-tab page="tab2.html" label="リスト２">
-    </ons-tab>
-    <ons-tab page="tab3.html" label="リスト３">
-    </ons-tab>
-  </ons-tabbar>
+	{% include 'menu/menu.twig' %}
+	<ons-tabbar swipeable position="top">
+		<ons-tab page="tab1.html" label="リスト１" active>
+		</ons-tab>
+		<ons-tab page="tab2.html" label="リスト２">
+		</ons-tab>
+		<ons-tab page="tab3.html" label="リスト３">
+		</ons-tab>
+	</ons-tabbar>
 </ons-page>
 
 {#リスト１#}
 <template id="tab1.html">
-  <ons-page id="Tab1">
-    <ons-card>
-      <!-- 1個分 -->
-      {% for val in res.0 %}
-        <ons-list-item>
-          <div class="left">
-            <img src="{{ val[0].img }}" id="{{val.0.id}}-img" alt="Onsen UI" style="width: 40vw">
-          </div>
-          <div class="center">
-            <p style="text-align: left">
-              <span class="list-item__title"  overflow="auto"><font size="3" id="{{val.0.id}}-name">{{ val[0].product_name | length > 15 ? val[0].product_name | slice(0, 15) ~ '…' : val[0].product_name }}</font></span>
-              <br><br>
-              <span class="list-item__subtitle" ><font size="5" id="{{val.0.id}}-price">{{ val.0.price }}円</font></span>
-            </p>
-            {# </ons-list-item> #}
-            {# <br><br> #}
+	<ons-page id="Tab1">
+		<ons-card>
+			<!-- 1個分 -->
+			{% for val in res.0 %}
+				<ons-list-item>
+					<div class="left">
+						<img src="{{ val[0].img }}" id="{{val.0.id}}-img" alt="Onsen UI" style="width: 40vw">
+					</div>
+					<div class="center">
+						<p style="text-align: left">
+							<span class="list-item__title"  overflow="auto"><font size="3" id="{{val.0.id}}-name">{{ val[0].product_name | length > 15 ? val[0].product_name | slice(0, 15) ~ '…' : val[0].product_name }}</font></span>
+							<br><br>
+							<span class="list-item__subtitle" ><font size="5" id="{{val.0.id}}-price">{{ val.0.price }}円</font></span>
+						</p>
+						{# </ons-list-item> #}
+						{# <br><br> #}
 
-            {#他の商品ボタン#}
-            <ons-button onclick="showTemplateDialog({{val.0.id}})">他の商品</ons-button>
-            <template id="dialog{{val.0.id}}.html">
-              {# <span style="display:none;" >{{loop.index}}</span> #}
-              <ons-dialog cancelable id="my-dialog{{val.0.id}}">
-                {# <ons-page style="width:95%;height:97%;overflow-x:hidden !important;"> #}
-                  <div style="text-align: center; padding: 10px;">
-                    {% if val[1].id %}                
-                      <p>
-                        {% for other in val[1:3] %}
-                          <img src="{{ other.img }}" align="left" alt="Onsen UI" style="width: 40%">
-                          <span class="list-item__title" overflow="hidden"><font size="3">{{ other.product_name }}</font></span>
-                          <br>
-                          <span class="list-item__subtitle"><font size="3">{{ other.price}}円</font></span>
-                          <section style="padding: 6px">
-                            <ons-button modifier="large" onclick="changeitem({{val.0.id}},{{other.price}},'{{other.product_name}}','{{other.img}}')">変更する</ons-button>
-                            {# add a function to the button to change contents of oritinal container -> add name to div #}
-                          </section>
-                          <br><br>
-                        {% endfor %}
-                      </p>
-                    {% else %}
-                      <p overflow="auto"><font size="3">{{ other.product_name }}</font></p>
-                    {% endif %}
-                    <p>
-                      <ons-button onclick="hideDialog('my-dialog{{val.0.id}}')">閉じる</ons-button>
-                    </p>
-                  </div>
-                {# </ons-page> #}
-              </ons-dialog>
-            </template>
-          </div>
-        </ons-list-item>
-      {% endfor %}
-      {#合計金額表示#}
-      <ons-list-item>
-        <div class="left">
-          <span class="list-item__title"><font size="6" color="#ff0000">合計金額</font></span>
-        </div>
-        <div class="center">
-          <span class="list-item__subtitle"><font size="6">{{total.0}}</font></span>
-        </div>
-      </ons-list-item>
-      <a href="https://twitter.com/intent/tweet?button_hashtag=SukkiriSuica&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #SukkiriSuica</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-   </ons-card>
-  </ons-page>
+						{#他の商品ボタン#}
+						<ons-button onclick="showTemplateDialog({{val.0.id}})">他の商品</ons-button>
+						<template id="dialog{{val.0.id}}.html">
+							{# <span style="display:none;" >{{loop.index}}</span> #}
+							<ons-dialog cancelable id="my-dialog{{val.0.id}}">
+								{# <ons-page style="width:95%;height:97%;overflow-x:hidden !important;"> #}
+									<div style="text-align: center; padding: 10px;">
+										{% if val[1].id %}                
+											<p>
+												{% for other in val[1:3] %}
+													<img src="{{ other.img }}" align="left" alt="Onsen UI" style="width: 40%">
+													<span class="list-item__title" overflow="hidden"><font size="3">{{ other.product_name }}</font></span>
+													<br>
+													<span class="list-item__subtitle"><font size="3">{{ other.price}}円</font></span>
+													<section style="padding: 6px">
+														<ons-button modifier="large" onclick="changeitem({{val.0.id}},{{other.price}},'{{other.product_name}}','{{other.img}}')">変更する</ons-button>
+														{# add a function to the button to change contents of oritinal container -> add name to div #}
+													</section>
+													<br><br>
+												{% endfor %}
+											</p>
+										{% else %}
+											<p overflow="auto"><font size="3">{{ other.product_name }}</font></p>
+										{% endif %}
+										<p>
+											<ons-button onclick="hideDialog('my-dialog{{val.0.id}}')">閉じる</ons-button>
+										</p>
+									</div>
+								{# </ons-page> #}
+							</ons-dialog>
+						</template>
+					</div>
+				</ons-list-item>
+			{% endfor %}
+			{#合計金額表示#}
+			<ons-list-item>
+				<div class="left">
+					<span class="list-item__title"><font size="6" color="#ff0000">合計金額</font></span>
+				</div>
+				<div class="center">
+					<span class="list-item__subtitle"><font size="6">{{total.0}}</font></span>
+				</div>
+			</ons-list-item>
+			<a href="https://twitter.com/intent/tweet?button_hashtag=SukkiriSuica&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #SukkiriSuica</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	 </ons-card>
+	</ons-page>
 </template>
 
 {#リスト２#}
 <template id="tab2.html">
-  <ons-page id="Tab2">
+	<ons-page id="Tab2">
+		<ons-card>
+			<!-- 1個分 -->
+			{% if res.1 %}
+				{% for val in res.1 %}
+					<ons-list-item>
+						<div class="left">
+							<img src="{{ val[0].img }}" id="{{val.0.id}}-img" alt="Onsen UI" style="width: 40vw">
+						</div>
+						<div class="center">
+							<p style="text-align: left">
+								<span class="list-item__title"  overflow="auto"><font size="3" id="{{val.0.id}}-name">{{ val[0].product_name | length > 15 ? val[0].product_name | slice(0, 15) ~ '…' : val[0].product_name }}</font></span>
+								<br><br>
+								<span class="list-item__subtitle" ><font size="5" id="{{val.0.id}}-price">{{ val.0.price }}円</font></span>
+							</p>
+							{# </ons-list-item> #}
+							{# <br><br> #}
 
-  <ons-card>
-
-  {#リスト２－１#}
-  {% if res.1 %}
-    {% for val in res.1 %}
-      <ons-list-item>
-        <div class="left">
-          <img src="{{ val.img }}" alt="Onsen UI" style="width: 40vw">
-        </div>
-        <p class="center">
-          <span class="list-item__title"><font size="5">{{ val.product_name | length > 15 ? val.product_name | slice(0, 15) ~ '…' : val.product_name }}</font></span>
-          <br>
-          <span class="list-item__subtitle"><font size="5">{{ val.price }}</font></span>
-        </p>
-      </ons-list-item>
-      {# <br><br> #}
-      {#他の商品ボタン#}
-      <ons-button onclick="showTemplateDialog()">他の商品</ons-button>
-      <template id="dialog.html">
-        <ons-dialog cancelable id="my-dialog">
-          <div style="text-align: center; padding: 10px;">
-            <p>
-              <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-              <span class="list-item__title"><font size="3">かっぱえびせん</font></span>
-              <span class="list-item__subtitle"><font size="3">180</font></span>
-              <section style="padding: 6px">
-                <ons-button modifier="large">変更する</ons-button>
-              </section>
-              <br><br>
-
-              <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-              <font size="3">かっぱえびせん</font>
-              <font size="3">180</font>
-              <section style="padding: 6px">
-                <ons-button modifier="large">変更する</ons-button>
-              </section>
-              <br><br>
-
-              <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-              <span class="list-item__title"><font size="3">かっぱえびせん</font></span>
-              <span class="list-item__subtitle"><font size="3">180</font></span>
-              <section style="padding: 6px">
-                <ons-button modifier="large">変更する</ons-button>
-              </section>
-              <br><br>
-            </p>
-            <p>
-              <ons-button onclick="hideDialog('my-dialog')">閉じる</ons-button>
-            </p>
-          </div>
-        </ons-dialog>
-      </template>
-    {% endfor %}
-
-    {#合計金額表示#}
-    <ons-list-item>
-      <div class="left">
-        <span class="list-item__title"><font size="6" color="#ff0000">合計金額</font></span>
-      </div>
-      <div class="center">
-        <span class="list-item__subtitle"><font size="6">{{total.1}}</font></span>
-      </div>
-    </ons-list-item>
-
-  {% else %}
-    <p>ほかの候補はありません</p>
-  {% endif %}
-
-
-
- </ons-card>
-
-  </ons-page>
+							{#他の商品ボタン#}
+							<ons-button onclick="showTemplateDialog({{val.0.id}})">他の商品</ons-button>
+							<template id="dialog{{val.0.id}}.html">
+								{# <span style="display:none;" >{{loop.index}}</span> #}
+								<ons-dialog cancelable id="my-dialog{{val.0.id}}">
+									{# <ons-page style="width:95%;height:97%;overflow-x:hidden !important;"> #}
+										<div style="text-align: center; padding: 10px;">
+											{% if val[1].id %}                
+												<p>
+													{% for other in val[1:3] %}
+														<img src="{{ other.img }}" align="left" alt="Onsen UI" style="width: 40%">
+														<span class="list-item__title" overflow="hidden"><font size="3">{{ other.product_name }}</font></span>
+														<br>
+														<span class="list-item__subtitle"><font size="3">{{ other.price}}円</font></span>
+														<section style="padding: 6px">
+															<ons-button modifier="large" onclick="changeitem({{val.0.id}},{{other.price}},'{{other.product_name}}','{{other.img}}')">変更する</ons-button>
+															{# add a function to the button to change contents of oritinal container -> add name to div #}
+														</section>
+														<br><br>
+													{% endfor %}
+												</p>
+											{% else %}
+												<p overflow="auto"><font size="3">{{ other.product_name }}</font></p>
+											{% endif %}
+											<p>
+												<ons-button onclick="hideDialog('my-dialog{{val.0.id}}')">閉じる</ons-button>
+											</p>
+										</div>
+									{# </ons-page> #}
+								</ons-dialog>
+							</template>
+						</div>
+					</ons-list-item>
+				{% endfor %}
+				{#合計金額表示#}
+				<ons-list-item>
+					<div class="left">
+						<span class="list-item__title"><font size="6" color="#ff0000">合計金額</font></span>
+					</div>
+					<div class="center">
+						<span class="list-item__subtitle"><font size="6">{{total.0}}</font></span>
+					</div>
+				</ons-list-item>
+				<a href="https://twitter.com/intent/tweet?button_hashtag=SukkiriSuica&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #SukkiriSuica</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+			{% else %}
+				<p>ほかの候補はありません</p>
+			{% endif %}
+	 </ons-card>
+	</ons-page>
 </template>
 
 {#リスト３#}
 <template id="tab3.html">
-  <ons-page id="Tab3">
-  <ons-card>
+	<ons-page id="Tab3">
+		<ons-card>
+			<!-- 1個分 -->
+			{% if res.2 %}
+				{% for val in res.2 %}
+					<ons-list-item>
+						<div class="left">
+							<img src="{{ val[0].img }}" id="{{val.0.id}}-img" alt="Onsen UI" style="width: 40vw">
+						</div>
+						<div class="center">
+							<p style="text-align: left">
+								<span class="list-item__title"  overflow="auto"><font size="3" id="{{val.0.id}}-name">{{ val[0].product_name | length > 15 ? val[0].product_name | slice(0, 15) ~ '…' : val[0].product_name }}</font></span>
+								<br><br>
+								<span class="list-item__subtitle" ><font size="5" id="{{val.0.id}}-price">{{ val.0.price }}円</font></span>
+							</p>
+							{# </ons-list-item> #}
+							{# <br><br> #}
 
-  {#リスト３－１#}
-  {% if res.2 %}
-    {% for val in res.2 %}
-      <ons-list-item>
-        <div class="left">
-          <img src="{{ val.img }}" alt="Onsen UI" style="width: 40vw">
-        </div>
-        <p class="center">
-          <span class="list-item__title"><font size="5">{{ val.product_name | length > 15 ? val.product_name | slice(0, 15) ~ '…' : val.product_name }}</font></span>
-          <br>
-          <span class="list-item__subtitle"><font size="5">{{ val.price }}</font></span>
-        </p>
-      </ons-list-item>
-      {# <br><br> #}
-      {#他の商品ボタン#}
-      <ons-button onclick="showTemplateDialog()">他の商品</ons-button>
-      <template id="dialog.html">
-        <ons-dialog cancelable id="my-dialog">
-          <div style="text-align: center; padding: 10px;">
-            <p>
-              <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-              <span class="list-item__title"><font size="3">かっぱえびせん</font></span>
-              <span class="list-item__subtitle"><font size="3">180</font></span>
-              <section style="padding: 6px">
-                <ons-button modifier="large">変更する</ons-button>
-              </section>
-              <br><br>
-
-              <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-              <font size="3">かっぱえびせん</font>
-              <font size="3">180</font>
-              <section style="padding: 6px">
-                <ons-button modifier="large">変更する</ons-button>
-              </section>
-              <br><br>
-
-              <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-              <span class="list-item__title"><font size="3">かっぱえびせん</font></span>
-              <span class="list-item__subtitle"><font size="3">180</font></span>
-              <section style="padding: 6px">
-                <ons-button modifier="large">変更する</ons-button>
-              </section>
-              <br><br>
-            </p>
-            <p>
-              <ons-button onclick="hideDialog('my-dialog')">閉じる</ons-button>
-            </p>
-          </div>
-        </ons-dialog>
-      </template>
-    {% endfor %}
-
-    {#合計金額表示#}
-    <ons-list-item>
-      <div class="left">
-        <span class="list-item__title"><font size="6" color="#ff0000">合計金額</font></span>
-      </div>
-      <div class="center">
-        <span class="list-item__subtitle"><font size="6">{{total.2}}</font></span>
-      </div>
-    </ons-list-item>
-
-
-  {% else %}
-      <p>ほかの候補はありません</p>
-  {% endif %}
-
-   </ons-card>
-
-  </ons-page>
+							{#他の商品ボタン#}
+							<ons-button onclick="showTemplateDialog({{val.0.id}})">他の商品</ons-button>
+							<template id="dialog{{val.0.id}}.html">
+								{# <span style="display:none;" >{{loop.index}}</span> #}
+								<ons-dialog cancelable id="my-dialog{{val.0.id}}">
+									{# <ons-page style="width:95%;height:97%;overflow-x:hidden !important;"> #}
+										<div style="text-align: center; padding: 10px;">
+											{% if val[1].id %}                
+												<p>
+													{% for other in val[1:3] %}
+														<img src="{{ other.img }}" align="left" alt="Onsen UI" style="width: 40%">
+														<span class="list-item__title" overflow="hidden"><font size="3">{{ other.product_name }}</font></span>
+														<br>
+														<span class="list-item__subtitle"><font size="3">{{ other.price}}円</font></span>
+														<section style="padding: 6px">
+															<ons-button modifier="large" onclick="changeitem({{val.0.id}},{{other.price}},'{{other.product_name}}','{{other.img}}')">変更する</ons-button>
+															{# add a function to the button to change contents of oritinal container -> add name to div #}
+														</section>
+														<br><br>
+													{% endfor %}
+												</p>
+											{% else %}
+												<p overflow="auto"><font size="3">{{ other.product_name }}</font></p>
+											{% endif %}
+											<p>
+												<ons-button onclick="hideDialog('my-dialog{{val.0.id}}')">閉じる</ons-button>
+											</p>
+										</div>
+									{# </ons-page> #}
+								</ons-dialog>
+							</template>
+						</div>
+					</ons-list-item>
+				{% endfor %}
+				{#合計金額表示#}
+				<ons-list-item>
+					<div class="left">
+						<span class="list-item__title"><font size="6" color="#ff0000">合計金額</font></span>
+					</div>
+					<div class="center">
+						<span class="list-item__subtitle"><font size="6">{{total.0}}</font></span>
+					</div>
+				</ons-list-item>
+				<a href="https://twitter.com/intent/tweet?button_hashtag=SukkiriSuica&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #SukkiriSuica</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+			{% else %}
+				<p>ほかの候補はありません</p>
+			{% endif %}
+	 </ons-card>
+	</ons-page>
 </template>
-
-
  
 {% endblock %}
 
