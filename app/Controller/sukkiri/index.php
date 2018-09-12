@@ -128,13 +128,18 @@ $app->post('/results/', function (Request $request, Response $response) {
     }
   }
 
+  // スッキリログ入れる。
   $sukkiriLogQuery = new SukkiriLog($this->db);
   $sukkiriLogQuery->insert(['ids' => implode(',', array_column($res[0], 'id'))]);
+
+  // 最新のスッキリログ取得。
+  $history = $sukkiriLogQuery->select([], 'log_id', 'DESC', 5);
 
 	// Render index view
 	return $this->view->render($response, 'sukkiri/sukkiri.twig', [
 		'res' => $res,
-		'total' => $total
+		'total' => $total,
+		'history' => $history
 	]);
 
 });
