@@ -19,16 +19,16 @@ var showTemplateDialog = function() {
     dialog.show();
   } else {
     ons.createElement('dialog.html', { append: true })
-      .then(function(dialog) {
-        dialog.show();
-      });
+    .then(function(dialog) {
+      dialog.show();
+    });
   }
 };
 
 var hideDialog = function(id) {
   document
-    .getElementById(id)
-    .hide();
+  .getElementById(id)
+  .hide();
 };
 </script>
 
@@ -47,7 +47,6 @@ var hideDialog = function(id) {
 {#リスト１#}
 <template id="tab1.html">
   <ons-page id="Tab1">
-
     <ons-card>
       <!-- 1個分 -->
       {% for val in res.0 %}
@@ -55,51 +54,54 @@ var hideDialog = function(id) {
           <div class="left">
             <img src="{{ val.img }}" alt="Onsen UI" style="width: 80%">
           </div>
-          <p class="center">
-            <span class="list-item__title"><font size="5">{{ val.product_name }}</font></span>
-            <br>
-            <span class="list-item__subtitle"><font size="5">{{ val.price }}</font></span>
-          </p>
+          <div class="center">
+            <p style="text-align: left">
+              <span class="list-item__title"><font size="5">{{ val.product_name }}</font></span>
+              <br><br>
+              <span class="list-item__subtitle"><font size="5">{{ val.price }}円</font></span>
+            </p>
+            {# </ons-list-item> #}
+            {# <br><br> #}
+
+            {#他の商品ボタン#}
+            <ons-button onclick="showTemplateDialog()">他の商品</ons-button>
+            <template id="dialog.html">
+              <ons-dialog cancelable id="my-dialog">
+                <div style="text-align: center; padding: 10px;">
+                  <p>
+                    <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
+                    <span class="list-item__title"><font size="3">かっぱえびせん</font></span>
+                    <span class="list-item__subtitle"><font size="3">180</font></span>
+                    <section style="padding: 6px">
+                      <ons-button modifier="large">変更する</ons-button>
+                    </section>
+                    <br><br>
+
+                    <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
+                    <font size="3">かっぱえびせん</font>
+                    <font size="3">180</font>
+                    <section style="padding: 6px">
+                      <ons-button modifier="large">変更する</ons-button>
+                    </section>
+                    <br><br>
+
+                    <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
+                    <span class="list-item__title"><font size="3">かっぱえびせん</font></span>
+                    <span class="list-item__subtitle"><font size="3">180</font></span>
+                    <section style="padding: 6px">
+                      <ons-button modifier="large">変更する</ons-button>
+                    </section>
+                    <br><br>
+                  </p>
+                  <p>
+                    <ons-button onclick="hideDialog('my-dialog')">閉じる</ons-button>
+                  </p>
+                </div>
+              </ons-dialog>
+            </template>
+          </div>
         </ons-list-item>
-        {# <br><br> #}
-        {#他の商品ボタン#}
-        <ons-button onclick="showTemplateDialog()">他の商品</ons-button>
-        <template id="dialog.html">
-          <ons-dialog cancelable id="my-dialog">
-            <div style="text-align: center; padding: 10px;">
-              <p>
-                <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-                <span class="list-item__title"><font size="3">かっぱえびせん</font></span>
-                <span class="list-item__subtitle"><font size="3">180</font></span>
-                <section style="padding: 6px">
-                  <ons-button modifier="large">変更する</ons-button>
-                </section>
-                <br><br>
-
-                <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-                <font size="3">かっぱえびせん</font>
-                <font size="3">180</font>
-                <section style="padding: 6px">
-                  <ons-button modifier="large">変更する</ons-button>
-                </section>
-                <br><br>
-
-                <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-                <span class="list-item__title"><font size="3">かっぱえびせん</font></span>
-                <span class="list-item__subtitle"><font size="3">180</font></span>
-                <section style="padding: 6px">
-                  <ons-button modifier="large">変更する</ons-button>
-                </section>
-                <br><br>
-              </p>
-              <p>
-                <ons-button onclick="hideDialog('my-dialog')">閉じる</ons-button>
-              </p>
-            </div>
-          </ons-dialog>
-        </template>
       {% endfor %}
-
       {#合計金額表示#}
       <ons-list-item>
         <div class="left">
@@ -110,8 +112,7 @@ var hideDialog = function(id) {
         </div>
       </ons-list-item>
 
-   </ons-card>
-
+    </ons-card>
   </ons-page>
 </template>
 
