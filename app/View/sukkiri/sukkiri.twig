@@ -12,18 +12,25 @@
 {% block page_content %}
 
 <script>
-var showTemplateDialog = function() {
-  var dialog = document.getElementById('my-dialog');
+var showTemplateDialog = function(id) {
+  var dialog = document.getElementById('my-dialog'+id);
 
   if (dialog) {
     dialog.show();
   } else {
-    ons.createElement('dialog.html', { append: true })
+    ons.createElement('dialog'+id+'.html', { append: true })
     .then(function(dialog) {
       dialog.show();
     });
   }
 };
+
+var changeitem = function(id, price, name, img) {
+  document.getElementById(String(id)+"-name").innerText=name;
+  document.getElementById(String(id)+"-price").innerText=price+"円";
+  document.getElementById(String(id)+"-img").src=img;
+};
+
 
 var hideDialog = function(id) {
   document
@@ -52,21 +59,22 @@ var hideDialog = function(id) {
       {% for val in res.0 %}
         <ons-list-item>
           <div class="left">
-            <img src="{{ val[0].img }}" alt="Onsen UI" style="width: 80%">
+            <img src="{{ val[0].img }}" id="{{val.0.id}}-img" alt="Onsen UI" style="width: 80%">
           </div>
           <div class="center">
             <p style="text-align: left">
-              <span class="list-item__title" overflow="auto"><font size="4">{{ val[0].product_name }}</font></span>
+              <span class="list-item__title"  overflow="auto"><font size="4" id="{{val.0.id}}-name">{{ val[0].product_name }}</font></span>
               <br><br>
-              <span class="list-item__subtitle"><font size="5">{{ val[0].price }}円</font></span>
+              <span class="list-item__subtitle" ><font size="5" id="{{val.0.id}}-price">{{ val.0.price }}円</font></span>
             </p>
             {# </ons-list-item> #}
             {# <br><br> #}
 
             {#他の商品ボタン#}
-            <ons-button onclick="showTemplateDialog()">他の商品</ons-button>
-            <template id="dialog.html">
-              <ons-dialog cancelable id="my-dialog">
+            <ons-button onclick="showTemplateDialog({{val.0.id}})">他の商品</ons-button>
+            <template id="dialog{{val.0.id}}.html">
+              {# <span style="display:none;" >{{loop.index}}</span> #}
+              <ons-dialog cancelable id="my-dialog{{val.0.id}}">
                 {# <ons-page style="width:95%;height:97%;overflow-x:hidden !important;"> #}
                   <div style="text-align: center; padding: 10px;">
                     {% if val[1].id %}                
@@ -77,7 +85,7 @@ var hideDialog = function(id) {
                           <br>
                           <span class="list-item__subtitle"><font size="3">{{ other.price}}円</font></span>
                           <section style="padding: 6px">
-                            <ons-button modifier="large">変更する</ons-button>
+                            <ons-button modifier="large" onclick="changeitem({{val.0.id}},{{other.price}},'{{other.product_name}}','{{other.img}}')">変更する</ons-button>
                             {# add a function to the button to change contents of oritinal container -> add name to div #}
                           </section>
                           <br><br>
@@ -87,7 +95,7 @@ var hideDialog = function(id) {
                       <p overflow="auto"><font size="3">{{ other.product_name }}</font></p>
                     {% endif %}
                     <p>
-                      <ons-button onclick="hideDialog('my-dialog')">閉じる</ons-button>
+                      <ons-button onclick="hideDialog('my-dialog{{val.0.id}}')">閉じる</ons-button>
                     </p>
                   </div>
                 {# </ons-page> #}
@@ -266,6 +274,8 @@ var hideDialog = function(id) {
   </ons-page>
 </template>
 
+
+ 
 {% endblock %}
 
 {#共通フッタとして追記したい情報を記載します。#}
