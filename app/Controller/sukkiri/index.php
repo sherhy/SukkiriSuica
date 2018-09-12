@@ -133,7 +133,7 @@ $app->post('/results/', function (Request $request, Response $response) {
   $sukkiriLogQuery->insert(['ids' => implode(',', array_column($res[0], 'id'))]);
 
   // 最新のスッキリログ取得。
-  $history = $sukkiriLogQuery->select([], 'log_id', 'DESC', 5);
+  $history = $sukkiriLogQuery->select([], 'log_id', 'DESC', 5, true);
 
 	// Render index view
 	return $this->view->render($response, 'sukkiri/sukkiri.twig', [
