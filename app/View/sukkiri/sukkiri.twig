@@ -25,6 +25,11 @@ var showTemplateDialog = function() {
   }
 };
 
+
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+@H.Aochi へのメッセージ
+
 var hideDialog = function(id) {
   document
     .getElementById(id)
@@ -53,12 +58,12 @@ var hideDialog = function(id) {
       {% for val in res.0 %}
         <ons-list-item>
           <div class="left">
-            <img src="{{ val.img }}" alt="Onsen UI" style="width: 80%">
+            <img src="{{ val.img }}" alt="Onsen UI" style="width: 40vw">
           </div>
           <p class="center">
-            <span class="list-item__title"><font size="5">{{ val.product_name }}</font></span>
+            <span class="list-item__title"><font size="3">{{ val.product_name | length > 15 ? val.product_name | slice(0, 15) ~ '…' : val.product_name }}</font></span>
             <br>
-            <span class="list-item__subtitle"><font size="5">{{ val.price }}</font></span>
+            <span class="list-item__subtitle"><font size="5">{{ val.price }}円</font></span>
           </p>
         </ons-list-item>
         {# <br><br> #}
@@ -109,7 +114,7 @@ var hideDialog = function(id) {
           <span class="list-item__subtitle"><font size="6">{{total.0}}</font></span>
         </div>
       </ons-list-item>
-
+      <a href="https://twitter.com/intent/tweet?button_hashtag=SukkiriSuica&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #SukkiriSuica</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
    </ons-card>
 
   </ons-page>
@@ -126,10 +131,10 @@ var hideDialog = function(id) {
     {% for val in res.1 %}
       <ons-list-item>
         <div class="left">
-          <img src="{{ val.img }}" alt="Onsen UI" style="width: 80%">
+          <img src="{{ val.img }}" alt="Onsen UI" style="width: 40vw">
         </div>
         <p class="center">
-          <span class="list-item__title"><font size="5">{{ val.product_name }}</font></span>
+          <span class="list-item__title"><font size="5">{{ val.product_name | length > 15 ? val.product_name | slice(0, 15) ~ '…' : val.product_name }}</font></span>
           <br>
           <span class="list-item__subtitle"><font size="5">{{ val.price }}</font></span>
         </p>
@@ -205,10 +210,10 @@ var hideDialog = function(id) {
     {% for val in res.2 %}
       <ons-list-item>
         <div class="left">
-          <img src="{{ val.img }}" alt="Onsen UI" style="width: 80%">
+          <img src="{{ val.img }}" alt="Onsen UI" style="width: 40vw">
         </div>
         <p class="center">
-          <span class="list-item__title"><font size="5">{{ val.product_name }}</font></span>
+          <span class="list-item__title"><font size="5">{{ val.product_name | length > 15 ? val.product_name | slice(0, 15) ~ '…' : val.product_name }}</font></span>
           <br>
           <span class="list-item__subtitle"><font size="5">{{ val.price }}</font></span>
         </p>
