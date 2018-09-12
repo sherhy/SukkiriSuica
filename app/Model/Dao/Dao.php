@@ -140,7 +140,7 @@ abstract class Dao
         $queryBuilder
             ->select('distinct price')
             ->from($this->_table_name)
-            ->orderBy("price","ASC")
+            // ->orderBy("price","ASC")
             ->setMaxResults(20);
 
         $query = $queryBuilder->execute();
