@@ -84,7 +84,8 @@ abstract class Dao
         //ベースクエリを構築する
         $queryBuilder
             ->select('*')
-            ->from($this->_table_name);
+            ->from($this->_table_name)
+            ->orderBy("rand()");
 
         //引数の配列からWhere句を生成
         foreach ($param as $key => $val) {
@@ -139,7 +140,8 @@ abstract class Dao
         $queryBuilder
             ->select('distinct price')
             ->from($this->_table_name)
-            ->setMaxResults(15);
+            // ->orderBy("price","ASC")
+            ->setMaxResults(20);
 
         $query = $queryBuilder->execute();
         $res = $query->FetchALL();
