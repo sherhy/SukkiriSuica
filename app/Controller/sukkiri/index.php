@@ -3,8 +3,8 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Model\Dao\User;
 use Model\Dao\Item;
+use Model\Dao\SukkiriLog;
 
 function pat($a, $l) {
 	$x = array('');
@@ -127,6 +127,9 @@ $app->post('/results/', function (Request $request, Response $response) {
     	$res[$i][$j] = $result;
     }
   }
+
+  $sukkiriLogQuery = new SukkiriLog($this->db);
+  $sukkiriLogQuery->insert(['ids' => implode(',', array_column($res[0], 'id'))]);
 
 	// Render index view
 	return $this->view->render($response, 'sukkiri/sukkiri.twig', [

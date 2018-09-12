@@ -1,6 +1,6 @@
 <?php
 
 namespace Model\Dao;
-class SkkiriLog extends Dao
+class SukkiriLog extends Dao
 {
 }
