@@ -74,7 +74,7 @@ $app->post('/results/', function (Request $request, Response $response) {
 		$total += $result[0]['price'];
 		array_push($res, $result);
 	}
-	var_dump($res);
+	// var_dump($res);
 
 	// Render index view
 	return $this->view->render($response, 'sukkiri/sukkiri.twig', [

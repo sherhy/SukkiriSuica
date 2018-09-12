@@ -56,7 +56,7 @@ var hideDialog = function(id) {
           </div>
           <div class="center">
             <p style="text-align: left">
-              <span class="list-item__title"><font size="5">{{ val[0].product_name }}</font></span>
+              <span class="list-item__title" overflow="auto"><font size="4">{{ val[0].product_name }}</font></span>
               <br><br>
               <span class="list-item__subtitle"><font size="5">{{ val[0].price }}円</font></span>
             </p>
@@ -67,23 +67,29 @@ var hideDialog = function(id) {
             <ons-button onclick="showTemplateDialog()">他の商品</ons-button>
             <template id="dialog.html">
               <ons-dialog cancelable id="my-dialog">
-                <div style="text-align: center; padding: 10px;">
-                  <p>
-                    {% for other in val[1:] %}
-                      <img src="{{ other.img }}" alt="Onsen UI" style="width: 40%">
-                      <span class="list-item__title"><font size="3">{{ other.product_name }}</font></span>
-                      <span class="list-item__subtitle"><font size="3">{{ other.price}}</font></span>
-                      <section style="padding: 6px">
-                        <ons-button modifier="large">変更する</ons-button>
-                        {# add a function to the button to change contents of oritinal container -> add name to div #}
-                      </section>
-                      <br><br>
-                    {% endfor %}
-                  </p>
-                  <p>
-                    <ons-button onclick="hideDialog('my-dialog')">閉じる</ons-button>
-                  </p>
-                </div>
+                {# <ons-page style="width:95%;height:97%;overflow-x:hidden !important;"> #}
+                  <div style="text-align: center; padding: 10px;">
+                    {% if val[1] %}                
+                      <p>
+                        {% for other in val[1:3] %}
+                          <img src="{{ other.img }}" align="left" alt="Onsen UI" style="width: 40%">
+                          <span class="list-item__title" overflow="hidden"><font size="3">{{ other.product_name }}</font></span>
+                          {# <span class="list-item__subtitle"><font size="3">{{ other.price}}</font></span> #}
+                          <section style="padding: 6px">
+                            <ons-button modifier="large">変更する</ons-button>
+                            {# add a function to the button to change contents of oritinal container -> add name to div #}
+                          </section>
+                          <br><br>
+                        {% endfor %}
+                      </p>
+                    {% else %}
+                      <p overflow="auto"><font size="3">{{ other.product_name }}</font></p>
+                    {% endif %}
+                    <p>
+                      <ons-button onclick="hideDialog('my-dialog')">閉じる</ons-button>
+                    </p>
+                  </div>
+                {# </ons-page> #}
               </ons-dialog>
             </template>
           </div>
