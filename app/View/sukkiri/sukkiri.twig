@@ -28,6 +28,11 @@ var showTemplateDialog = function(id) {
   }
 };
 
+
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+
+<script>
 var changeitem = function(id, price, name, img) {
   document.getElementById(String(id)+"-name").innerText=name;
   document.getElementById(String(id)+"-price").innerText=price+"円";
@@ -63,11 +68,11 @@ var hideDialog = function(id) {
       {% for val in res.0 %}
         <ons-list-item>
           <div class="left">
-            <img src="{{ val[0].img }}" id="{{val.0.id}}-img" alt="Onsen UI" style="width: 80%">
+            <img src="{{ val[0].img }}" id="{{val.0.id}}-img" alt="Onsen UI" style="width: 40vw">
           </div>
           <div class="center">
             <p style="text-align: left">
-              <span class="list-item__title"  overflow="auto"><font size="4" id="{{val.0.id}}-name">{{ val[0].product_name }}</font></span>
+              <span class="list-item__title"  overflow="auto"><font size="3" id="{{val.0.id}}-name">{{ val[0].product_name | length > 15 ? val[0].product_name | slice(0, 15) ~ '…' : val[0].product_name }}</font></span>
               <br><br>
               <span class="list-item__subtitle" ><font size="5" id="{{val.0.id}}-price">{{ val.0.price }}円</font></span>
             </p>
@@ -117,8 +122,8 @@ var hideDialog = function(id) {
           <span class="list-item__subtitle"><font size="6">{{total.0}}</font></span>
         </div>
       </ons-list-item>
-
-    </ons-card>
+      <a href="https://twitter.com/intent/tweet?button_hashtag=SukkiriSuica&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #SukkiriSuica</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+   </ons-card>
   </ons-page>
 </template>
 
@@ -133,10 +138,10 @@ var hideDialog = function(id) {
     {% for val in res.1 %}
       <ons-list-item>
         <div class="left">
-          <img src="{{ val.img }}" alt="Onsen UI" style="width: 80%">
+          <img src="{{ val.img }}" alt="Onsen UI" style="width: 40vw">
         </div>
         <p class="center">
-          <span class="list-item__title"><font size="5">{{ val.product_name }}</font></span>
+          <span class="list-item__title"><font size="5">{{ val.product_name | length > 15 ? val.product_name | slice(0, 15) ~ '…' : val.product_name }}</font></span>
           <br>
           <span class="list-item__subtitle"><font size="5">{{ val.price }}</font></span>
         </p>
@@ -211,10 +216,10 @@ var hideDialog = function(id) {
     {% for val in res.2 %}
       <ons-list-item>
         <div class="left">
-          <img src="{{ val.img }}" alt="Onsen UI" style="width: 80%">
+          <img src="{{ val.img }}" alt="Onsen UI" style="width: 40vw">
         </div>
         <p class="center">
-          <span class="list-item__title"><font size="5">{{ val.product_name }}</font></span>
+          <span class="list-item__title"><font size="5">{{ val.product_name | length > 15 ? val.product_name | slice(0, 15) ~ '…' : val.product_name }}</font></span>
           <br>
           <span class="list-item__subtitle"><font size="5">{{ val.price }}</font></span>
         </p>
