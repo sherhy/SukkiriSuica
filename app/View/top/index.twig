@@ -42,7 +42,7 @@
                 <div class="row">
                     <!--<div class="col-md-4 col-md-offset-4">-->
                     <div style="text-align: center; margin: 30px 15px;">
-                        <form id="sukkiri" method="POST" action="/results/">
+                        <form id="sukkiri" method="POST" action="/results/" onSubmit="return SukkiriBar()">
                             <div class="form-inline" style="padding-bottom:30px">
                                 <!--<label for="value">スッキリさせる金額</label>-->
                                 <!-- <input type="text" class="form-control" id="value" placeholder=""> -->
@@ -57,4 +57,15 @@
 			</div>
 		</div>
 	</ons-page>
+    <script>
+        var SukkiriBar = function(){
+            var v = document.getElementById('value').value;
+            if(v.length >= 4){
+                ons.notification.alert('1000円以上の金額では使用出来ません。普通に使いましょう。');
+                return false;
+            }else{
+                return true;
+            }
+        }
+    </script>
 {% endblock %}
