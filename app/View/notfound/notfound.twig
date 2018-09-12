@@ -19,22 +19,41 @@
             padding: 0;
             opacity: 0.8;
         }
-        .main{
-            text-align:center;
-            padding: 100px 30px;
+        .main {
+            text-align: center;
+            padding: 30px 0;
         }
-        .reButton{
-            padding:0 20px;
+        .main h1{
+            font-size:300%;
+            color:black;
+        }
+        .main p{
+            color:black;
+            font-weight:bold
+        }
+        .reButton {
+            padding: 5px 20px;
+        }
+        .image {
+            text-align:center;
         }
     </style>
     <ons-page>
         <div class="main">
-            <h1>ないです。</h1>
-            <p>この価格ではスッキリ使い切れる組み合わせが見つかりませんでした…</p>
+            <h1>ないです</h1>
         </div>
-        <div class="reButton">
-        <a href="/"><ons-button modifier="large">TOPに戻る</ons-button></a>
+        <div class="image">
+            <img border="0" width="380px" src="https://www.pakutaso.com/shared/img/thumb/miagerukijineko171027_TP_V.jpg">
         </div>
-    </ons-page>
-    <script></script>
+        <div class="main">
+            <p>この価格ではスッキリ使い切れる<br>組み合わせが見つかりませんでした…</p>
+        </div>
+    </div>
+    <div class="reButton">
+        <a href="/">
+            <ons-button modifier="large">TOPに戻る</ons-button>
+        </a>
+    </div>
+</ons-page>
+<script></script>
 {% endblock %}
