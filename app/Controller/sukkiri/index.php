@@ -109,9 +109,21 @@ $app->post('/results/', function (Request $request, Response $response) {
 	// var_dump($res);
 
 
-	// Render index view
-	return $this->view->render($response, 'sukkiri/sukkiri.twig', [
-		'res' => $res,
+	return $this->view->render($response, 'sukkiri/sukkiri.twig',[
+    'res' => $res,
+		'res2' => urlencode($res[0][0][product_name]),
+    'res3' => urlencode($res[0][1][product_name]),
+    'res4' => urlencode($res[0][2][product_name]),
+    'res5' => urlencode($res[0][3][product_name]),
+    'res6' => urlencode($res[1][0][product_name]),
+    'res7' => urlencode($res[1][1][product_name]),
+    'res8' => urlencode($res[1][2][product_name]),
+    'res9' => urlencode($res[1][3][product_name]),
+    'res10' => urlencode($res[2][0][product_name]),
+    'res11' => urlencode($res[2][1][product_name]),
+    'res12' => urlencode($res[2][2][product_name]),
+    'res13' => urlencode($res[2][3][product_name]),
+
 		'total' => $total
 	]);
 
