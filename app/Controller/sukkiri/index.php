@@ -73,15 +73,20 @@ $app->post('/results/', function (Request $request, Response $response) {
     $i += 1;
   }
   $res = array();
+  $total = 0;
   foreach ($minarray as $_) {
   	$param["price"]=$_;
   	$result=$userItem->select($param, "", "", 1, false);
+  	$total += $result['price'];
   	array_push($res, $result);
   }
-  var_dump($res);
+  // var_dump($res);
 
   // Render index view
-	return $this->view->render($response, 'sukkiri/sukkiri.twig', $res);
+	return $this->view->render($response, 'sukkiri/sukkiri.twig', [
+		'res' => $res,
+		'total' => $total
+	]);
 
 });
 
