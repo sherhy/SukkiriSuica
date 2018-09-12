@@ -4,7 +4,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 // スッキリログコントローラ
-$app->post('/history/', function (Request $request, Response $response) {
+$app->get('/history/', function (Request $request, Response $response) {
 
     //GETされた内容を取得します。
     $data = $request->getQueryParams();
