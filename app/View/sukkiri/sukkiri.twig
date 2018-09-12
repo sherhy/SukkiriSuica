@@ -29,6 +29,7 @@ var changeitem = function(id, price, name, img) {
   document.getElementById(String(id)+"-name").innerText=name;
   document.getElementById(String(id)+"-price").innerText=price+"円";
   document.getElementById(String(id)+"-img").src=img;
+  hideDialog("my-dialog"+String(id));
 };
 
 
