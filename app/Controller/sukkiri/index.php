@@ -106,7 +106,7 @@ $app->post('/results/', function (Request $request, Response $response) {
     	$res[$i][$j] = $result;
     }
   }
-	var_dump($res);
+	// var_dump($res);
 
 
 	// Render index view
