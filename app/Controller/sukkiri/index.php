@@ -1,5 +1,6 @@
 <?php
 
+
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Model\Dao\User;
@@ -114,18 +115,17 @@ $app->post('/results/', function (Request $request, Response $response) {
 
 
   $res = array();
-  $total = 0;
+  $total = array(0,0,0);
   for($i=0;$i<count($minarrays);$i++)
-    $j=0;
+  {
     for($j=0;$j<count($minarrays[$i]);$j++)
     {
-      $param["price"]=$_;
-    	$result[$j]=$userItem->select($param, "", "", 1, false);
-    	$total[$j] += $result['price'];
-    	array_push($res, $result);
+      $param["price"]=$minarrays[$i][$j];
+    	$result=$userItem->select($param, "", "", 1, false);
+    	$total[$i] += $minarrays[$i][$j];
+    	$res[$i][$j] = $result;
     }
   }
-  // var_dump($res);
 
   // Render index view
 	return $this->view->render($response, 'sukkiri/sukkiri.twig', [
