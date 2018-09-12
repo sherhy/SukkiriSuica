@@ -71,13 +71,59 @@ $app->post('/results/', function (Request $request, Response $response) {
     }
     $i += 1;
   }
+
+
+  $minarrays = array();
+
+  $limit = array_sum($minarray);
+
+  $array = array();
+  $min=100;
+
+  $l = 4;
+  $i=1;
+
+  $minarrayscount = 0;
+
+  while($i<=$l)
+  {
+    $x=array();
+    $x=pat($a,$i);
+    foreach($x as $xy)
+    {
+      $xy=substr($xy,0,-1);
+      $arr = explode(',', $xy);
+
+
+      if(array_sum($arr)==$limit)
+      {
+        $minarrays[$minarrayscount]=$arr;
+        $minarrayscount += 1;
+        break;
+      }
+
+    }
+    $i += 1;
+
+    if ($minarrayscount == 3)
+    {
+      break;
+    }
+  }
+
+
+
   $res = array();
   $total = 0;
-  foreach ($minarray as $_) {
-  	$param["price"]=$_;
-  	$result=$userItem->select($param, "", "", 1, false);
-  	$total += $result['price'];
-  	array_push($res, $result);
+  for($i=0;$i<count($minarrays);$i++)
+    $j=0;
+    for($j=0;$j<count($minarrays[$i]);$j++)
+    {
+      $param["price"]=$_;
+    	$result[$j]=$userItem->select($param, "", "", 1, false);
+    	$total[$j] += $result['price'];
+    	array_push($res, $result);
+    }
   }
   // var_dump($res);
 
