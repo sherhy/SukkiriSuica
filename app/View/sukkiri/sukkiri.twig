@@ -72,9 +72,10 @@ var hideDialog = function(id) {
                     {% for other in val[1:] %}
                       <img src="{{ other.img }}" alt="Onsen UI" style="width: 40%">
                       <span class="list-item__title"><font size="3">{{ other.product_name }}</font></span>
-                      <span class="list-item__subtitle"><font size="3">180</font></span>
+                      <span class="list-item__subtitle"><font size="3">{{ other.price}}</font></span>
                       <section style="padding: 6px">
                         <ons-button modifier="large">変更する</ons-button>
+                        {# add a function to the button to change contents of oritinal container -> add name to div #}
                       </section>
                       <br><br>
                     {% endfor %}
