@@ -25,7 +25,6 @@ function pat($a, $l) {
 }
 
 
-
 // スッキリ画面コントローラ
 $app->post('/results/', function (Request $request, Response $response) {
 
