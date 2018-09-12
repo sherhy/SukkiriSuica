@@ -10,8 +10,10 @@
 
 {#ここから表示したい情報を記載します。#}
 {% block page_content %}
-
 <script>
+{% if total == 0 %}
+window.location.href = "http://5.teama.2020-graduates.tk/notfound/";
+{% endif %}
 var showTemplateDialog = function() {
   var dialog = document.getElementById('my-dialog');
 
