@@ -52,13 +52,13 @@ var hideDialog = function(id) {
       {% for val in res %}
         <ons-list-item>
           <div class="left">
-            <img src="{{ val.img }}" alt="Onsen UI" style="width: 80%">
+            <img src="{{ val[0].img }}" alt="Onsen UI" style="width: 80%">
           </div>
           <div class="center">
             <p style="text-align: left">
-              <span class="list-item__title"><font size="5">{{ val.product_name }}</font></span>
+              <span class="list-item__title"><font size="5">{{ val[0].product_name }}</font></span>
               <br><br>
-              <span class="list-item__subtitle"><font size="5">{{ val.price }}円</font></span>
+              <span class="list-item__subtitle"><font size="5">{{ val[0].price }}円</font></span>
             </p>
             {# </ons-list-item> #}
             {# <br><br> #}
@@ -69,29 +69,15 @@ var hideDialog = function(id) {
               <ons-dialog cancelable id="my-dialog">
                 <div style="text-align: center; padding: 10px;">
                   <p>
-                    <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-                    <span class="list-item__title"><font size="3">かっぱえびせん</font></span>
-                    <span class="list-item__subtitle"><font size="3">180</font></span>
-                    <section style="padding: 6px">
-                      <ons-button modifier="large">変更する</ons-button>
-                    </section>
-                    <br><br>
-
-                    <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-                    <font size="3">かっぱえびせん</font>
-                    <font size="3">180</font>
-                    <section style="padding: 6px">
-                      <ons-button modifier="large">変更する</ons-button>
-                    </section>
-                    <br><br>
-
-                    <img src="https://monaca.io/img/logos/download_image_onsenui_01.png" alt="Onsen UI" style="width: 40%">
-                    <span class="list-item__title"><font size="3">かっぱえびせん</font></span>
-                    <span class="list-item__subtitle"><font size="3">180</font></span>
-                    <section style="padding: 6px">
-                      <ons-button modifier="large">変更する</ons-button>
-                    </section>
-                    <br><br>
+                    {% for other in val[1:] %}
+                      <img src="{{ other.img }}" alt="Onsen UI" style="width: 40%">
+                      <span class="list-item__title"><font size="3">{{ other.product_name }}</font></span>
+                      <span class="list-item__subtitle"><font size="3">180</font></span>
+                      <section style="padding: 6px">
+                        <ons-button modifier="large">変更する</ons-button>
+                      </section>
+                      <br><br>
+                    {% endfor %}
                   </p>
                   <p>
                     <ons-button onclick="hideDialog('my-dialog')">閉じる</ons-button>

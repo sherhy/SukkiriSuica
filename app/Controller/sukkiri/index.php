@@ -24,33 +24,28 @@ function pat($a, $l) {
 	return $x;
 }
 
-
 // スッキリ画面コントローラ
 $app->post('/results/', function (Request $request, Response $response) {
-
 	//GETされた内容を取得します。
 	$money = $request->getParsedBody();
 	$limit = $money["zangaku"];
-	// var_dump($limit);
-
 	$minarray = array();
 	$min=100;
 
 	$userItem = new Item($this->db);
-	$c = $userItem->distinct();
+	$c = $userItem->distinct(); //distinctのlimitを上げることでメモリー負荷
 	$a = array();
 	foreach($c as $b){
 		array_push($a, strval($b["price"]));
 	}
-	// $a = array('11','32','54','108','216','324');
+	//$l を上げることでメモリー負荷
 	$l = 4;
-	$i=1;
+	$i = 1;
 	while($i<=$l)
 	{
 		$x=array();
 		$x=pat($a,$i);
-		foreach($x as $xy)
-		{
+		foreach($x as $xy){
 			$xy=substr($xy,0,-1);
 			$arr = explode(',', $xy);
 			if(array_sum($arr)==$limit){
@@ -75,11 +70,11 @@ $app->post('/results/', function (Request $request, Response $response) {
 	$total = 0;
 	foreach ($minarray as $_) {
 		$param["price"]=$_;
-		$result=$userItem->select($param, "", "", 1, false);
-		$total += $result['price'];
+		$result=$userItem->select($param, "", "", "", true);
+		$total += $result[0]['price'];
 		array_push($res, $result);
 	}
-	// var_dump($res);
+	var_dump($res);
 
 	// Render index view
 	return $this->view->render($response, 'sukkiri/sukkiri.twig', [
